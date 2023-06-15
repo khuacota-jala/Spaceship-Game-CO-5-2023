@@ -8,11 +8,14 @@ class BulletHandler:
     
     def update(self, player, enemies):
         for bullet in self.bullets:
-            if bullet.type == BULLET_ENEMY_TYPE:
-                bullet.update(player)
+            if not bullet.is_alive:
+                self.remove_bullet(bullet)
             else:
-                for enemy in enemies:
-                    bullet.update(enemy)
+                if bullet.type == BULLET_ENEMY_TYPE:
+                    bullet.update(player)
+                else:
+                    for enemy in enemies:
+                        bullet.update(enemy)
     
     def draw(self, screen):
         for bullet in self.bullets:
@@ -23,3 +26,6 @@ class BulletHandler:
             self.bullets.append(BulletEnemy(center))
         else:
             self.bullets.append(BulletSpaceship(center))
+    
+    def remove_bullet(self, bullet):
+        self.bullets.remove(bullet)

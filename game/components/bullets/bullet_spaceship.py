@@ -15,6 +15,8 @@ class BulletSpaceship(Bullet):
 
     def update(self, enemy):
         self.rect.y -= self.SPEED
+        if self.rect.y <= 0:
+            self.is_alive = False
         super().update(enemy)
         
 
