@@ -17,5 +17,7 @@ class BulletEnemy(Bullet):
         self.rect.y += self.SPEED
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
-        super().update(player)
+        if not player.has_shield:
+            super().update(player)
+        
 
